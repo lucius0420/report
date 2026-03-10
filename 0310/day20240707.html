@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>氣泡排序法</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            margin: 5px 0;
+        }
+        .output {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>氣泡排序法</h1>
+    <p>請輸入一組數字（以逗號分隔，例如：5,3,8,6,2）：</p>
+    <input type="text" id="numbersInput" placeholder="輸入數字">
+    <button onclick="performBubbleSort()">排序</button>
+    <div class="output" id="output"></div>
+
+    <script>
+        function performBubbleSort() {
+            // 取得使用者輸入的數字
+            const input = document.getElementById('numbersInput').value;
+            const numbers = input.split(',').map(num => parseInt(num.trim()));
+
+            if (numbers.some(isNaN)) {
+                document.getElementById('output').innerText = "請輸入有效的數字！";
+                return;
+            }
+
+            // 氣泡排序法實現
+            for (let i = 0; i < numbers.length - 1; i++) {
+                for (let j = 0; j < numbers.length - i - 1; j++) {
+                    if (numbers[j] > numbers[j + 1]) {
+                        // 交換位置
+                        const temp = numbers[j];
+                        numbers[j] = numbers[j + 1];
+                        numbers[j + 1] = temp;
+                    }
+                }
+            }
+
+            // 顯示排序結果
+            document.getElementById('output').innerText = `排序結果：${numbers.join(', ')}`;
+        }
+    </script>
+</body>
+</html>
